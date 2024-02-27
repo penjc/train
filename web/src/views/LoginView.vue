@@ -42,8 +42,8 @@ import { reactive } from 'vue';
 import axios from "axios";
 import { notification } from 'ant-design-vue';
 import {useRouter} from "vue-router";
-
 // import store from "@/store";
+
 const router = useRouter();
 const loginForm = reactive({
   mobile: '13000000000',
