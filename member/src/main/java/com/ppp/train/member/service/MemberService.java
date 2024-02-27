@@ -3,6 +3,7 @@ package com.ppp.train.member.service;
 import cn.hutool.core.collection.CollUtil;
 import com.ppp.train.common.exception.BusinessException;
 import com.ppp.train.common.exception.BusinessExceptionEnum;
+import com.ppp.train.common.util.SnowUtil;
 import com.ppp.train.member.domain.Member;
 import com.ppp.train.member.domain.MemberExample;
 import com.ppp.train.member.mapper.MemberMapper;
@@ -29,13 +30,12 @@ public class MemberService {
         List<Member> list = memberMapper.selectByExample(memberExample);
         if(CollUtil.isEmpty(list)) {
             Member member = new Member();
-            member.setId(System.currentTimeMillis());
+            member.setId(SnowUtil.getSnowflakeNextId());
             member.setMobile(mobile);
             memberMapper.insert(member);
             return member.getId();
         }
         else{
-//            return list.get(0).getId();
             throw new BusinessException(BusinessExceptionEnum.MEMBER_MOBILE_EXIST);
         }
     }
