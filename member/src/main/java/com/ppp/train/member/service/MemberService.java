@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
 import com.ppp.train.common.exception.BusinessException;
 import com.ppp.train.common.exception.BusinessExceptionEnum;
+import com.ppp.train.common.util.JwtUtil;
 import com.ppp.train.common.util.SnowUtil;
 import com.ppp.train.member.domain.Member;
 import com.ppp.train.member.domain.MemberExample;
@@ -89,6 +90,16 @@ public class MemberService {
         }
         MemberLoginResp memberLoginResp = new MemberLoginResp();
         BeanUtils.copyProperties(memberDB, memberLoginResp);
+
+        //生成token
+        //使用hutool工具中jwt
+        //JWT的map和key
+        //Map<String, Object> map = BeanUtil.beanToMap(memberLoginResp);
+        //String token = JWTUtil.createToken(map, key.getBytes());
+
+        //自己封装的jwt工具类
+        String token = JwtUtil.createToken(memberLoginResp.getId(), memberLoginResp.getMobile());
+        memberLoginResp.setToken(token);
         return memberLoginResp;
     }
 
