@@ -3,6 +3,7 @@ package com.ppp.train.member.controller;
 import com.ppp.train.common.resp.CommonResp;
 import com.ppp.train.member.req.MemberRegisterReq;
 import com.ppp.train.member.service.MemberService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public CommonResp<Long> register(MemberRegisterReq memberRegisterReq){
+    public CommonResp<Long> register(@Valid MemberRegisterReq memberRegisterReq){
         long register = memberService.register(memberRegisterReq);
         return new CommonResp<Long>(register);
     }
