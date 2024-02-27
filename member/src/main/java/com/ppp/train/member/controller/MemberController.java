@@ -1,5 +1,7 @@
 package com.ppp.train.member.controller;
 
+import com.ppp.train.common.resp.CommonResp;
+import com.ppp.train.member.req.MemberRegisterReq;
 import com.ppp.train.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,12 +17,14 @@ public class MemberController {
     private MemberService memberService;
 
     @GetMapping("/count")
-    public Integer count(){
-        return memberService.count();
+    public CommonResp<Integer> count(){
+        Integer count = memberService.count();
+        return new CommonResp<>(count);
     }
 
     @PostMapping("/register")
-    public long register(String mobile){
-        return memberService.register(mobile);
+    public CommonResp<Long> register(MemberRegisterReq memberRegisterReq){
+        long register = memberService.register(memberRegisterReq);
+        return new CommonResp<Long>(register);
     }
 }
