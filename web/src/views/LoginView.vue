@@ -47,8 +47,6 @@ const loginForm = reactive({
   code: '',
 });
 
-
-
 const sendCode = () => {
   axios.post("http://127.0.0.1:8000/member/member/send-code", {
     mobile: loginForm.mobile
@@ -68,7 +66,6 @@ const login = () => {
     let data = response.data;
     if (data.success) {
       notification.success({ description: '登录成功！' });
-      console.log("登录成功：", data.content);
       // 登录成功，跳到控台主页
     } else {
       notification.error({ description: data.message });
