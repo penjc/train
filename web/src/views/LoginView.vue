@@ -42,7 +42,7 @@ import { reactive } from 'vue';
 import axios from "axios";
 import { notification } from 'ant-design-vue';
 import {useRouter} from "vue-router";
-// import store from "@/store";
+import store from "@/store";
 
 const router = useRouter();
 const loginForm = reactive({
@@ -71,7 +71,7 @@ const login = () => {
       notification.success({ description: '登录成功！' });
       // 登录成功，跳到控台主页
       router.push("/");
-      // store.commit("setMember", data.content);
+      store.commit("setMember", data.content);
     } else {
       notification.error({ description: data.message });
     }
