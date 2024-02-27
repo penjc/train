@@ -1,7 +1,10 @@
 package com.ppp.train.member.controller;
 
 import com.ppp.train.common.resp.CommonResp;
+import com.ppp.train.member.req.MemberLoginReq;
 import com.ppp.train.member.req.MemberRegisterReq;
+import com.ppp.train.member.req.MemberSendCodeReq;
+import com.ppp.train.member.resp.MemberLoginResp;
 import com.ppp.train.member.service.MemberService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +29,17 @@ public class MemberController {
     @PostMapping("/register")
     public CommonResp<Long> register(@Valid MemberRegisterReq memberRegisterReq){
         long register = memberService.register(memberRegisterReq);
-        return new CommonResp<Long>(register);
+        return new CommonResp<>(register);
+    }
+
+    @PostMapping("/send-code")
+    public CommonResp<Long> sendCode(@Valid MemberSendCodeReq memberSendCodeReq){
+        memberService.sendCode(memberSendCodeReq);
+        return new CommonResp<>();
+    }
+    @PostMapping("/login")
+    public CommonResp<MemberLoginResp> login(@Valid MemberLoginReq memberLoginReq){
+        MemberLoginResp resp = memberService.login(memberLoginReq);
+        return new CommonResp<>(resp);
     }
 }
