@@ -62,6 +62,7 @@ export default defineComponent({
     let member = store.state.member;
     const selectedKeys = ref([]);
 
+    // 菜单同步激活
     watch(() => router.currentRoute.value.path, (newValue) => {
       console.log('watch', newValue);
       selectedKeys.value = [];
