@@ -68,10 +68,10 @@ const login = () => {
   axios.post("/member/member/login", loginForm).then((response) => {
     let data = response.data;
     if (data.success) {
+      store.commit("setMember", data.content);
       notification.success({ description: '登录成功！' });
       // 登录成功，跳到控台主页
       router.push("/");
-      store.commit("setMember", data.content);
     } else {
       notification.error({ description: data.message });
     }

@@ -12,7 +12,7 @@
         <a-layout-content
             :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }"
         >
-          Content
+          所有会员总数{{count}}
         </a-layout-content>
       </a-layout>
     </a-layout>
@@ -22,6 +22,19 @@
 
 import TheHeaderView from "@/components/the-header.vue";
 import TheSiderView from "@/components/the-sider.vue";
+import axios from "axios";
+import {notification} from "ant-design-vue";
+import {ref} from "vue";
+
+const count = ref(0);
+axios.get("/member/member/count").then((response) => {
+  let data = response.data;
+  if (data.success) {
+    count.value = data.content;
+  } else {
+    notification.error({ description: data.message });
+  }
+})
 
 
 </script>
